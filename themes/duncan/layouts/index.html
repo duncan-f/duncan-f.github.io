@@ -1,0 +1,29 @@
+{{ define "main" }}
+<main class="flex-shrink-0">
+<div class="container">
+	<div class="row">
+		<div class="col-sm">
+			<span class="text-center">{{ .Content }}</span>
+			<div class="my-5">
+			{{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
+			{{ range $paginator.Pages }}
+<div class="card mb-3">
+	{{ if .Params.Thumbnail }}
+	<img src="/img/{{ .Params.Thumbnail }}" class="card-img-top" alt="{{ .Title }}">
+	{{ end }}
+  <div class="card-body">
+	  <h5 class="card-title">{{ .Title }}</h5>
+	  <h6 class="card-subtitle mb-2 text-muted">{{ .Date.Format "02 Jan. 2006" }} &bullet; {{ .Params.Author }} &bullet; {{ .ReadingTime }} min read</h6>
+	  <p class="card-text">{{ .Summary }}</p>
+	  {{ if .Truncated }}
+	  <a class="btn btn-link text-decoration-none" href="{{ .RelPermalink }}">Read more...</a>
+	  {{ end }}
+  </div>
+</div>
+			{{ end }}
+			</div>
+		</div>
+	</div>
+</div>
+</main>
+{{ end }}

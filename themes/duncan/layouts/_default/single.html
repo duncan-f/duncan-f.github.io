@@ -1,0 +1,24 @@
+{{ define "title" }}
+	<!-- This will override the default value set in baseof.html; i.e., "{{.Site.Title}}" in the original example-->
+	{{ .Title }} &ndash; {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<main class="flex-shrink-0">
+  <div class="container">
+	<div class="row justify-content-md-center">
+		<div class="mb-5 col-sm-10">
+			<div class="page-header">
+			<h1 class="display-5">{{ .Title }}</h1>
+			</div>
+			{{ if not (in .Page.Title "Contact") }}
+			<span class="text-muted">{{ .Date.Format "January 2, 2006" }} &bullet; {{ .Params.Author }} &bullet; {{ .WordCount }} word(s) &bullet; {{ .ReadingTime }} min read</span>
+			{{ end }}
+			<div class="my-3 pt-5">
+			{{ .Content }}
+			</div>
+		</div>
+	</div>
+  </div>
+</main>
+{{ end }}

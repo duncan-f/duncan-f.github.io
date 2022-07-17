@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language }}" class="h-100">
+    {{- partial "head.html" . -}}
+    <body class="d-flex flex-column h-100">
+        {{- partial "header.html" . -}}
+        {{- block "main" . }}{{- end }}
+        {{- partial "footer.html" . -}}
+    </body>
+</html>

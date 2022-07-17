@@ -1,0 +1,25 @@
+baseURL = 'https://duncan-f.github.io/'
+languageCode = 'en-us'
+title = "dunCan's Website"
+theme = 'duncan'
+copyright = "Copyright © 2022, Farouk Mokhtari; All rights reserved."
+
+enableEmoji = true
+
+[params]
+author = 'Farouk Mokhtari'
+description = "dunCan's personal blog"
+mainSections = ["posts"]
+
+[menu]
+[[menu.main]]
+pageRef = 'posts'
+name = 'Blog'
+url = '/posts/'
+weight = 10
+
+[[menu.main]]
+pageRef = 'contact'
+name = 'Contact'
+url = '/contact/'
+weight = 20
