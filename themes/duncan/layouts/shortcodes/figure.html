@@ -1,0 +1,22 @@
+<!-- image -->
+<div class="hstack gap-2">
+<figure{{ if isset .Params "class" }} class="{{ index .Params "class" }}"{{ end }}>
+    {{ if isset .Params "link"}}<a href="{{ index .Params "link"}}">{{ end }}
+        <img src="{{ index .Params "src" }}" {{ if or (isset .Params "alt") (isset .Params "caption") }}alt="{{ if isset .Params "alt"}}{{ index .Params "alt"}}{{else}}{{ index .Params "caption" }}{{ end }}"{{ end }} />
+    {{ if isset .Params "link"}}</a>{{ end }}
+    {{ if or (or (isset .Params "title") (isset .Params "caption")) (isset .Params "attr")}}
+    <figcaption>{{ if isset .Params "title" }}
+        <h5 class="mt-2">{{ index .Params "title" }}</h5>{{ end }}
+        {{ if or (isset .Params "caption") (isset .Params "attr")}}
+		<p class="fs-6">
+        {{ index .Params "caption" }}
+		</p>
+        {{ if isset .Params "attrlink"}}<a class="text-decoration-none" href="{{ index .Params "attrlink"}}"> {{ end }}
+            {{ index .Params "attr" }}
+        {{ if isset .Params "attrlink"}}</a> {{ end }}
+        {{ end }}
+    </figcaption>
+    {{ end }}
+</figure>
+</div>
+<!-- image -->

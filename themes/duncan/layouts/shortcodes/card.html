@@ -1,0 +1,16 @@
+<div class="col-sm">
+<div class="card" style="width: 10rem;">
+	<img src="{{ index .Params "src" }}" class="card-img-top" {{ if or (isset .Params "alt") (isset .Params "caption") }}alt="{{ if isset .Params "alt"}}{{ index .Params "alt"}}{{else}}{{ index .Params "caption" }}{{ end }}"{{ end }} />
+  <div class="card-body">
+	  {{ if isset .Params "title" }}
+    <h5 class="card-title">{{ index .Params "title" }}</h5>
+	{{ end }}
+	{{ if or (isset .Params "caption") (isset .Params "attr")}}
+    <p class="card-text">{{ index .Params "caption" }}</p>
+	{{ if isset .Params "attrlink"}}<a class="btn btn-primary" target="_blank" href="{{ index .Params "attrlink"}}"> {{ end }}
+        {{ index .Params "attr" }}
+    {{ if isset .Params "attrlink"}}</a> {{ end }}
+	{{ end }}
+  </div>
+</div>
+</div>
