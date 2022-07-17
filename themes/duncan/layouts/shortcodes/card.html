@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <div class="col-sm">
 <div class="card" style="width: 10rem;">
+=======
+<div class="card" style="width: 10em;">
+>>>>>>> 7241d5d (Added some shortcuts to handle images)
 	<img src="{{ index .Params "src" }}" class="card-img-top" {{ if or (isset .Params "alt") (isset .Params "caption") }}alt="{{ if isset .Params "alt"}}{{ index .Params "alt"}}{{else}}{{ index .Params "caption" }}{{ end }}"{{ end }} />
   <div class="card-body">
 	  {{ if isset .Params "title" }}
@@ -13,4 +17,7 @@
 	{{ end }}
   </div>
 </div>
+<<<<<<< HEAD
 </div>
+=======
+>>>>>>> 7241d5d (Added some shortcuts to handle images)
