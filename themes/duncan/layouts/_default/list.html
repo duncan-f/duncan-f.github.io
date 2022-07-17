@@ -7,7 +7,7 @@
   <div class="row justify-content-sm-center">
 	<div class="my-5 col-sm-10">
 	{{ range .Data.Pages.GroupByDate "2006" }}
-		<span class="mb-2 mt-5 text-muted">{{ .Key }}</span>
+		<span class="mb-2 text-muted">{{ .Key }}</span>
 	{{ range .Pages }}
 	<div class="hstack">
 			<a class="text-decoration-none text-dark" href="{{ .RelPermalink }}">
