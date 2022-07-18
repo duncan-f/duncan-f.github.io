@@ -10,8 +10,4 @@ author: ""
 
 You can buy me coffee :coffee: here:
 
-{{< image src="/img/usdt.png" title="USDT" caption="TWi6yNRhxzkmgZhhoriDzWgvrSsxbdQCb8" >}}
-
-{{< image src="/img/bitcoin.png" title="Bitcoin" caption="1JJmuidSTRCugnBKH8H7bDxEmTtAAg4kyn" >}}
-
-{{< image src="/img/xmr.png" title="Monero" caption="86Asjp2TLCkKnw3PYsiKaTDwL8mNhiL7uV67ptCtVxqbSnaZfATQ6t4d1mfWnKu4kB4ieQHMApGhUdUY3h4RKBS2Kuc5RyW" >}}
+{{< crypto >}}
