@@ -5,7 +5,7 @@ author: ""
 ---
 
 :link: **Github:** [duncan-f](https://github.com/duncan-f)\
-:link: **Twitter:** [@duncan12back](https://twitter.com/@duncan12back)\
+:link: **Twitter:** [@duncan12back](https://twitter.com/duncan12back)\
 :email: **E-mail:** [fmokhtari@mail.ru](mailto:fmokhtari@mail.ru)
 
 You can buy me coffee :coffee: here:

@@ -10,3 +10,7 @@ body {
 main > .container {
   padding: 60px 15px 0;
 }
+
+.f-size {
+  font-size: 0.5rem;
+}
