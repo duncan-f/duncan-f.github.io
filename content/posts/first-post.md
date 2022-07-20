@@ -25,7 +25,19 @@ First, you need to install Linux on your computer. I prefer
 any other linux distribution if it suits you, you can install for example
 [Ubuntu Server](https://ubuntu.com).
 
-I'm not gonna go through the process of installing Linux on your computer,
-there's plenty of videos on YouTube that explains the process step by step.
+I'm not gonna go through the process of installing Linux on your computer, you
+can find plenty of videos on YouTube that explains the process step-by-step.
+
+## Install nginx
+
+You have to install **nginx** on your server:
+
+- Debian / Ubuntu:
+
+{{< highlight shell >}} sudo apt install nginx {{< / highlight >}}
+
+- Archlinux-based distributions:
+
+{{< highlight shell >}} sudo pacman -S nginx {{< / highlight >}}
 
 To be continued...

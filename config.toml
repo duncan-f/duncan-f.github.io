@@ -6,6 +6,10 @@ copyright = "Copyright © 2022, Farouk Mokhtari; All rights reserved."
 
 enableEmoji = true
 
+[Author]
+name = 'Farouk Mokhtari'
+email = "fmokhtari@mail.ru"
+
 [params]
 author = 'Farouk Mokhtari'
 description = "dunCan's personal blog"

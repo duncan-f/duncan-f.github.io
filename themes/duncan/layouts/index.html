@@ -18,7 +18,7 @@
 		{{ .Params.Author }} &bullet;
 		{{ .ReadingTime }} min read
 	  </h6>
-	  <p class="card-text">{{ .Summary | markdownify }}</p>
+	  <p class="card-text">{{ .Summary | safeHTML }}</p>
 	  {{ if .Truncated }}
 	  <a
 		  class="btn btn-link text-decoration-none"
