@@ -1,5 +1,5 @@
 <!-- As a link -->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
   <div class="container-fluid">
 	  <a class="navbar-brand" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
 	  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,10 +10,13 @@
 		{{- $currentPage := . -}}
 		{{- range .Site.Menus.main }}
 		<li class="nav-item">
-			<a class="nav-link{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}" aria-current="page" href="{{ .URL }}">{{ .Name }}</a>
+			<a class="nav-link{{ if $currentPage.IsMenuCurrent "main" . }} active" aria-current="page{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
 		</li>
 		{{- end }}
       </ul>
+	  <a class="d-flex" href="{{ .Site.BaseURL }}index.xml">
+		<img src="/img/rss.svg" style="width: 20px; height: 20px"/>
+	  </a>
 	  <span class="navbar-text">{{ .Params.Description }}</span>
     </div>
   </div>

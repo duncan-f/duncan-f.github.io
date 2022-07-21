@@ -6,7 +6,21 @@
 body {
   font-family: "Lato", sans-serif;
 }
+/*
+.dark-mode {
+  filter: invert(100%) hue-rotate(180deg);
+}
 
+img,
+picture,
+video {
+  filter: invert(100%) hue-rotate(180deg);
+}
+
+[class="invert"] {
+  filter: invert(100%) hue-rotate(180deg);
+}
+*/
 main > .container {
   padding: 60px 15px 0;
 }
