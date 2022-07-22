@@ -13,11 +13,15 @@
 			<a class="nav-link{{ if $currentPage.IsMenuCurrent "main" . }} active" aria-current="page{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
 		</li>
 		{{- end }}
-      </ul>
-	  <a class="d-flex" href="{{ .Site.BaseURL }}index.xml">
-		<img src="/img/rss.svg" style="width: 20px; height: 20px"/>
+		<li class="nav-item">
+	  <a class="nav-link" href="{{ .Site.BaseURL }}index.xml">
+		<img src="/img/rss.svg" style="width: 20px; height: 20px;"/>
 	  </a>
-	  <span class="navbar-text">{{ .Params.Description }}</span>
+		</li>
+      </ul>
+	  {{ with .Params.Description }}
+	  <span class="navbar-text">{{ . }}</span>
+		{{ end }}
     </div>
   </div>
 </nav>

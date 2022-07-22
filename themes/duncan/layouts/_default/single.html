@@ -8,18 +8,22 @@
   <div class="container">
 	<div class="row">
 		<div class="mb-5 col-sm-10">
-			<div class="page-header">
-			<h1 class="display-5">{{ .Title }}</h1>
-			</div>
+	<article class="blog-post">
+        <h2 class="blog-post-title">{{ .Title }}</h2>
 			{{ if not (in .Page.Title "Contact") }}
-			<span class="text-muted">
-				{{ .Date.Format "January 2, 2006" }} &bullet;
-				{{ .Params.Author }} &bullet;
-				{{ .WordCount }} word(s) &bullet;
-				{{ .ReadingTime }} min read
-			</span>
+		<p class="blog-post-meta">
+			{{ .Date.Format "January 2, 2006" }}
+			{{ with .Params.Author }}by
+				<a
+					class="text-decoration-none"
+					href="#">
+				{{ . }}
+				</a>
 			{{ end }}
-			<div class="my-5">{{ .Content }}</div>
+		</p>
+	{{ end }}
+		{{ .Content }}
+      </article>
 		</div>
 	</div>
   </div>

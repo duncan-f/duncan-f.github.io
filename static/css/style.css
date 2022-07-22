@@ -4,7 +4,7 @@
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Lato", Georgia, "Times New Roman", sans-serif;
 }
 /*
 .dark-mode {
@@ -28,4 +28,43 @@ main > .container {
 .f-size {
   font-size: xx-small;
   overflow-wrap: break-word;
+}
+
+/* stylelint-disable selector-list-comma-newline-after */
+
+.flex-auto {
+  flex: 0 0 auto;
+}
+
+.h-250 {
+  height: 250px;
+}
+
+@media (min-width: 768px) {
+  .h-md-250 {
+    height: 250px;
+  }
+}
+
+/* Pagination */
+.blog-pagination {
+  margin-bottom: 4rem;
+}
+.blog-pagination > .btn {
+  border-radius: 2rem;
+}
+
+/*
+ * Blog posts
+ */
+.blog-post {
+  margin-bottom: 4rem;
+}
+.blog-post-title {
+  margin-bottom: 0.25rem;
+  font-size: 2.5rem;
+}
+.blog-post-meta {
+  margin-bottom: 1.25rem;
+  color: #727272;
 }

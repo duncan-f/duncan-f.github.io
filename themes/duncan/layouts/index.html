@@ -7,15 +7,18 @@
 			<div class="my-4">
 			{{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
 			{{ range first 10 $paginator.Pages }}
-<div class="card mb-3">
-	{{ if .Params.Thumbnail }}
-	<img src="/img/{{ .Params.Thumbnail }}" class="card-img-top" alt="{{ .Title }}">
-	{{ end }}
+<div class="card my-5">
   <div class="card-body">
-	  <h5 class="card-title">{{ .Title }}</h5>
+	  <h5 class="card-title h4">
+		  {{ .Title }}
+		  {{ if .Draft }}
+			  <span class="fs-6 text-muted">[draft]</span>
+		  {{ end }}
+	  </h5>
 	  <h6 class="card-subtitle mb-2 text-muted">
-		{{ .Date.Format "02 Jan. 2006" }} &bullet;
-		{{ .Params.Author }} &bullet;
+		{{ .Date.Format "02 Jan. 2006" }} &ndash;
+		{{ .Params.Author }} &ndash;
+		{{ .WordCount }} word(s) &ndash;
 		{{ .ReadingTime }} min read
 	  </h6>
 	  <p class="card-text">{{ .Summary | safeHTML }}</p>
