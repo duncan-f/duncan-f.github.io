@@ -8,5 +8,4 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: 'https://duncan-f.github.io',
   integrations: [tailwind(), react(), sitemap()],
-  output: "server"
 });
