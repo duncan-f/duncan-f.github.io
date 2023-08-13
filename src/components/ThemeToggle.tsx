@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IoSunny } from 'react-icons/io5';
-import { FaMoon } from 'react-icons/fa';
+import { BiSolidSun, BiSolidMoon } from 'react-icons/bi';
 
 const ThemeToggle: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false)
@@ -44,7 +43,7 @@ const ThemeToggle: React.FC = () => {
       className="mx-2 inline-flex items-center justify-center"
       onClick={toggleTheme}
     >
-      {theme === "dark" ? <IoSunny size={20} /> : <FaMoon size={20} />}
+      {theme === "dark" ? <BiSolidSun size={20} /> : <BiSolidMoon size={20} />}
     </button>
   ) : (
     <div />
