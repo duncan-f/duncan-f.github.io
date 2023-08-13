@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { IoSunny, IoMoon } from 'react-icons/io5';
+import { IoSunny } from 'react-icons/io5';
+import { FaMoon } from 'react-icons/fa';
 
-export default function ThemeToggle() {
+const ThemeToggle: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false)
 
   const [theme, setTheme] = useState(() => {
@@ -43,10 +44,11 @@ export default function ThemeToggle() {
       className="mx-2 inline-flex items-center justify-center"
       onClick={toggleTheme}
     >
-      {theme === "dark" ? <IoSunny size={20} /> : <IoMoon size={20} />}
+      {theme === "dark" ? <IoSunny size={20} /> : <FaMoon size={20} />}
     </button>
   ) : (
     <div />
   )
 }
 
+export default ThemeToggle;
