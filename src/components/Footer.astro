@@ -1,0 +1,35 @@
+---
+import Link from "@components/Link.astro";
+import { Icon } from "astro-icon";
+import { siteData } from "@/lib/config";
+---
+<div class="prose dark:prose-invert mx-auto max-w-sm md:max-w-2xl mb-5">
+  <hr />
+
+  <footer class="flex justify-between">
+    <span>{siteData.author}</span>
+
+    <div class="flex gap-4">
+      <Link href="/rss.xml">
+        <Icon name="mdi:rss" width="20" height="20" title="RSS" />
+      </Link>
+
+      <Link href="/sitemap-index.xml">
+        <Icon name="mdi:sitemap" width="20" height="20" title="Sitemap" />
+      </Link>
+
+      <Link href="mailto:fmokhtari@mail.ru">
+        <Icon name="mdi:email" width="20" height="20" title="Email" />
+      </Link>
+
+      <Link href="https://github.com/duncan-f">
+        <Icon name="mdi:github" width="20" height="20" title="GitHub" />
+      </Link>
+
+      <Link href="https://x.com/duncan12back">
+        <Icon name="mdi:twitter" width="20" height="20" title="Twitter" />
+      </Link>
+    </div>
+  </footer>
+</div>
+

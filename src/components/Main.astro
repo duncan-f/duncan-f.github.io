@@ -1,0 +1,12 @@
+---
+export interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props as Props;
+---
+<main role="main" class={`mx-auto max-w-xs md:max-w-md ${className}`}>
+  <slot/>
+</main>
+
+

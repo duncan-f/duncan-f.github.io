@@ -1,0 +1,55 @@
+---
+import { Icon } from "astro-icon";
+import { slugify, dateFormat } from "@/lib/utils";
+import { getEntryBySlug } from "astro:content";
+import Article from "@components/Article.astro";
+import Layout from "@layouts/Layout.astro";
+import Link from "@components/Link.astro";
+
+const { slug } = Astro.params;
+const entry = await getEntryBySlug('posts', slug);
+const { title, description, date, author, draft, tags } = entry.data;
+const { Content } = await entry.render();
+---
+
+<Layout {title} {description}>
+  <div class="pt-20">
+    <div class="max-w-sm md:max-w-xl mx-auto my-4">
+      <Link href="/posts">&laquo; back</Link>
+    </div>
+    <h1 class="font-bold font-rubik text-4xl md:text-3xl px-6 text-center">
+      {title}
+    </h1>
+    <div
+      class="flex flex-col md:flex-row md:items-center md:justify-center mx-10 my-4 gap-2 md:gap-6"
+    >
+    <span class="inline-flex gap-1">
+      <Icon name="tabler:user" width="20" height="20" />
+        <Link href={`/author/${slugify(author.name)}`}>{author.name}</Link>
+    </span>
+    <span class="inline-flex gap-1">
+      <Icon name="tabler:calendar" width="20" height="20" />
+      {dateFormat(date)}
+    </span>
+    <span class="inline-flex gap-1">
+      <Icon name="tabler:tags" width="20" height="20" />
+      {tags.map((tag: any) =>
+        <div class="inline-flex">#{tag}</div>
+      )}
+    </span>
+    </div>
+
+    <div class="mx-auto max-w-xs md:max-w-md">
+    {draft && (
+      <blockquote class="my-8 bg-neutral-300 py-4 px-4 dark:bg-neutral-700 rounded-lg drop-shadow-xl" role="alert">
+        This post is a <strong>draft</strong>. If you're reading this, you're probably a cool and trusted person. Please <strong>don't share</strong> it thank you.
+      </blockquote>
+    )}
+    </div>
+  </div>
+
+  <Article className="prose prose-slate dark:prose-invert prose-lg md:prose-base prose-headings:font-rubik prose-p:text-justify prose-a:underline-offset-2 hover:prose-a:text-teal-500 prose-a:decoration-teal-500 prose-img:border prose-img:border-slate-300 dark:prose-img:border-zinc-700 prose-img:rounded-xl">
+    <Content />
+  </Article>
+</Layout>
+

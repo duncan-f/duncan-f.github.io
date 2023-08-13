@@ -1,0 +1,47 @@
+---
+import { slugify, formatContent, dateFormat } from "@/lib/utils";
+import { CollectionEntry, getCollection } from 'astro:content';
+import Link from "@components/Link.astro";
+import Main from "@components/Main.astro";
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon";
+
+const posts = await getCollection("posts");
+const formatedPosts: CollectionEntry<"posts">[] = formatContent(posts);
+---
+
+<Layout
+  title="My Blog"
+  description="This is where I share my knowledge of technology"
+>
+  <Main className="pt-10">
+      { formatedPosts.map((post: any) => (
+      <div class="my-10 p-2">
+        <Link href={`/category/${slugify(post.data.category)}`}>
+          {post.data.category}
+        </Link>
+        <h2 class="font-rubik font-bold text-3xl md:text-xl">
+          {post.data.title}
+        </h2>
+        <div class="flex flex-col items-start justify-start md:flex-row md:gap-2 mt-2">
+          <div class="inline-flex gap-1">
+            <Icon name="tabler:user" width="20" height="20" />
+            <Link href={`/author/${slugify(post.data.author.name)}`}>
+              {post.data.author.name}
+            </Link>
+          </div>
+          <div class="inline-flex gap-1">
+            <Icon name="tabler:calendar" width="20" height="20" />
+            {dateFormat(post.data.date)}
+          </div>
+        </div>
+        <p class="my-2 text-justify">{post.data.description}</p>
+        <Link href={`/posts/${post.slug}`}>Read more...</Link>
+      </div>
+      ))}
+  </Main>
+
+</Layout>
+
+
+

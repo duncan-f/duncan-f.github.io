@@ -1,0 +1,111 @@
+---
+import { Icon } from "astro-icon";
+import { getCollection, CollectionEntry } from "astro:content";
+
+// component imports
+import Layout from "@layouts/Layout.astro";
+import Main from "@components/Main.astro";
+import Heading from "@components/Heading.astro";
+import Link from "@components/Link.astro";
+
+// utils
+import { slugify, formatContent, dateFormat } from "@/lib/utils";
+
+const { author } = Astro.params;
+
+const allPosts = await getCollection("posts");
+const formattedPosts: CollectionEntry<"posts">[] = formatContent(allPosts);
+
+const allAuthors = [
+  ...new Set(formattedPosts.map((post) => post.data.author).flat()),
+];
+
+const authorObj = allAuthors.reduce((acc: any, curr: any) => {
+  if (!acc.find((item: any) => item.name === curr.name)) {
+    acc.push(curr);
+  }
+  return acc;
+}, []);
+
+const authorPosts = formattedPosts.filter(
+  (post) => slugify(post.data.author.name) === author
+);
+---
+
+<Layout
+  title={`Posts by ${authorObj[0].name}`}
+  description={`Posts by ${authorObj[0].name}`}
+>
+  <Main className="pt-10">
+    <Heading className={'md:pt-10 pt-20'}>
+      Posts by
+      <span class="dark:text-gray-600 text-gray-400">
+        {authorObj[0].name}
+      </span>
+    </Heading>
+    {
+      authorPosts.map((post) => (
+      <div class="pt-5">
+        <h2 class="font-rubik font-bold text-xl">
+          {post.data.title}
+          {post.data.draft && (<span>+</span>)}
+        </h2>
+        <div class="flex items-center pt-2 gap-4">
+        <div class="inline-flex gap-1">
+          <Icon name="tabler:calendar" width="20" height="20" />
+          {dateFormat(post.data.date)}
+        </div>
+        <div class="inline-flex">
+          <Link href={`/category/${slugify(post.data.category)}`}>
+            {post.data.category}
+          </Link>
+        </div>
+        </div>
+        <p class="my-2 text-justify">{post.data.description}</p>
+        <Link href={`/posts/${post.slug}`}>Read more...</Link>
+      </div>
+      ))
+    }
+
+    <Heading className={'pt-5'}>About the author</Heading>
+    <ul class="mx-auto max-w-2xl my-4">
+      {authorObj[0].website &&
+        <li class="inline-flex gap-1">
+          <Icon name="tabler:world" width="20" height="20" />
+          <Link href={authorObj[0].website}>{authorObj[0].website}</Link>
+        </li>
+      }
+      {authorObj[0].email &&
+        <li class="inline-flex gap-1">
+          <Icon name="tabler:mail" width="20" height="20" />
+          <Link href={`mailto:${authorObj[0].email}`}>{authorObj[0].email}</Link>
+        </li>
+      }
+      {authorObj[0].btc &&
+        <li class="inline-flex gap-1">
+          <Icon name="btc" width="20" height="20" />
+          <small class="break-all">{authorObj[0].btc}</small>
+        </li>
+      }
+      {authorObj[0].usdt &&
+        <li class="inline-flex gap-1">
+          <Icon name="usdt" width="20" height="20" />
+          <small class="break-all">{authorObj[0].usdt}</small>
+        </li>
+      }
+      {authorObj[0].eth &&
+        <li class="inline-flex gap-1">
+          <Icon name="eth" width="20" height="20" />
+          <small class="break-all">{authorObj[0].eth}</small>
+        </li>
+      }
+      {authorObj[0].xmr &&
+        <li class="inline-flex gap-1">
+          <Icon name="xmr" width="20" height="20" />
+          <small class="max-w-[250px]">{authorObj[0].xmr}</small>
+        </li>
+      }
+    </ul>
+  </Main>
+</Layout>
+
