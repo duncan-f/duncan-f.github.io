@@ -5,11 +5,15 @@ category: General
 author:
   name: Farouk Mokhtari
   email: fmokhtari@mail.ru
+  website: https://fmokhtari.com
+  btc: 1JJmuidSTRCugnBKH8H7bDxEmTtAAg4kyn
+  usdt: TWi6yNRhxzkmgZhhoriDzWgvrSsxbdQCb8
+  xmr: 87Asjp2TLCkKnw3PYsiKaTDwL8mNhiL7uV67ptCtVxqbSnaZfATQ6t4d1mfWnKu4kB4ieQHMApGhUdUY3h4RKBS2Kuc5RyW
 tags:
   - lesson
 date: 2023-08-05T17:11:50.172Z
 ---
-# Headers:
+## Headers:
 ```
 # H1
 ## H2
@@ -41,7 +45,7 @@ Alt-H1
 Alt-H2
 ------
 
-# Emphasis:
+## Emphasis:
 ```
 Emphasis, aka italics, with *asterisks* or _underscores_.
 
@@ -59,33 +63,33 @@ Combined emphasis with **asterisks and _underscores_**.
 
 Strikethrough uses two tildes. ~~Strikethrough this.~~
 
-# Lists:
+## Lists:
 
-## Unordered list:
+### Unordered list:
 ```
-- Item 1 
-- Item 2 
-- Item 3 
+- Item 1
+- Item 2
+- Item 3
 ```
 * Item 1
 * Item 2
 * Item 3
 
-## Ordered list:
+### Ordered list:
 ```
 1. First item
-2. Second item 
-3. Third item 
+2. Second item
+3. Third item
 ```
 1. First item
-2. Second item 
-3. Third item 
+2. Second item
+3. Third item
 
-# Links and Images:
+## Links and Images:
 ```
-[Inline Link](https://www.example.com) 
+[Inline Link](https://www.example.com)
 
-[Inline Link with title](https://www.example.com "Example") 
+[Inline Link with title](https://www.example.com "Example")
 ```
 [Inline Link](https://www.example.com)
 
@@ -95,22 +99,22 @@ Strikethrough uses two tildes. ~~Strikethrough this.~~
 ```
 ![Image](/images/coding.jpg)
 
-# Code Blocks and Inline Code:
+## Code Blocks and Inline Code:
 
-## Inline code:
+### Inline code:
 ```
 You can display inline `code` using backticks.
 ```
 You can display inline `code` using backticks.
 
-## Code block:
+### Code block:
 You can put your code between ` ``` ` to display a block of code.
 
 ```javascript
-// Code block example 
-function example_function() { 
-  console.log("This is a code block"); 
-} 
+// Code block example
+function example_function() {
+  console.log("This is a code block");
+}
 ```
 
 ```python
@@ -123,116 +127,109 @@ print(hello)
 This is just a basic block of code without any highlighting.
 ```
 
-# Blockquotes:
+## Blockquotes:
 ```
-> This is a blockquote. 
+> This is a blockquote.
 >
-> It can span multiple lines. 
+> It can span multiple lines.
 ```
-> This is a blockquote. 
+> This is a blockquote.
 >
-> It can span multiple lines. 
+> It can span multiple lines.
 
-# Horizontal Rule: 
+## Horizontal Rule:
+You can get the horizontal rule with asterisks __*__ underscores **_** and hyphens **-** like so.
 ```
 ---
 ```
 ---
 
-# Tables:
+## Tables:
 ```
-| Column 1 | Column 2 | 
-| -------- | -------- | 
-| Data | Data | 
+| Column 1 | Column 2 |
+| -------- | -------- |
+| Data | Data |
+| Data | Data |
 ```
 | Column 1 | Column 2 |
 | -------- | -------- |
 | Data     | Data     |
+| Data     | Data     |
 
-# Escape Characters:
-
-\\* Asterisks \*
-
-\\\ Backslash \\
-
-\\` Backtick \`
-
-\\_ Underscore \_
-
-\\{\\} Curly braces \{\}
-
-\\[\\] Square brackets \[\]
-
-\\(\\) Parentheses \(\)
-
-\\# Hash mark \#
-
-\\+ Plus sign \+
-
-\\- Minus sign/hyphen \-
-
-\\. Dot/period \.
-
-# Advanced Features:
-
-## Highlighting text:
+## Escape Characters:
 ```
-This is a ==highlighted text==.
+\* Asterisks *
+\\ Backslash \
+\` Backtick `
+\_ Underscore _
+\{\} Curly braces {}
+\[\] Square brackets []
+\(\) Parentheses ()
+\# Hash mark #
+\+ Plus sign +
+\- Minus sign/hyphen -
+\. Dot/period .
 ```
-This is a ==highlighted text==.
+## Advanced Features:
 
-## Task Lists:
+### Task Lists:
 ```
 - [x] Task completed.
-- [ ] Task incomplete. 
+- [ ] Task incomplete.
 ```
 Output :
 
 - [x] Task completed.
-- [ ] Task incomplete. 
+- [ ] Task incomplete.
 
-## Footnotes:
+### Footnotes:
 ```
-Here is some text with a footnote[^1] and another one with [^text]. 
+Here is some text with a footnote[^1] and another one with [^text].
 
-[^1]: This is the footnote content. 
+[^1]: This is the footnote content.
 [^text]: This is another content for the footnote.
   This can be multi-line footnote.
 ```
-Here is some text with a footnote[^1] and another one with [^text]. 
+Here is some text with a footnote[^1] and another one with [^text].
 
-[^1]: This is the footnote content. 
+[^1]: This is the footnote content.
 [^text]: This is another content for the footnote.
-  This can be multi-line footnote.
+    This can be multi-line footnote.
 
-## Abbreviations:
+### Abbreviations:
 ```
-The HTML abbreviation tag is <abbr title="Hypertext Markup Language">HTML</abbr>. 
+The HTML abbreviation tag is <abbr title="Hypertext Markup Language">HTML</abbr>.
 ```
-The HTML abbreviation tag is <abbr title="Hypertext Markup Language">HTML</abbr>. 
+The HTML abbreviation tag is <abbr title="Hypertext Markup Language">HTML</abbr>.
 
-## Definition Lists:
+### Highlighting text:
 ```
-Term 1 
-: Definition for Term 1 
-
-Term 2 
-: Definition for Term 2 
+This is a ==highlighted text==.
 ```
-Term 1 
-: Definition for Term 1 
+This is a ==highlighted text==.
 
-Term 2 
-: Definition for Term 2 
+### Definition Lists:
+```
+Term 1
+: Definition for Term 1
 
-## Mathematical Formulas:
+Term 2
+: Definition for Term 2
+```
+Term 1
+: Definition for Term 1
 
-### Inline formula:
+Term 2
+: Definition for Term 2
 
-$E=mc^2$ 
+### Mathematical Formulas:
 
-### Block formula:
+#### Inline formula:
 
-$$ 
-E=mc^2 
+$E=mc^2$
+
+#### Block formula:
+
+$$
+E=mc^2
 $$

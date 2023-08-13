@@ -11,7 +11,8 @@ const formatedPosts: CollectionEntry<"posts">[] = formatContent(posts);
 
 <Layout title="Home">
   <div class="text-center mt-20 mb-10 p-5 rounded-lg text-neutral-900 bg-neutral-300 dark:text-neutral-50 dark:bg-neutral-500 drop-shadow-xl">
-    Welcome to my personal blog. Here I share all my knowledge of technology and Cyber Security.
+    <p>Welcome to my personal blog. Here I share all my knowledge of technology and Cyber Security.</p>
+    <p>I&apos;m an engineer and a self-taught web developer passionate about Cyber Security, Ethical Hacking and CTFs. I like solving challenges on Hack The Box and Try Hack Me.</p>
   </div>
   { formatedPosts.map((post: any) => (
     <div class="flex items-center justify-between">

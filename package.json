@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@astrojs/react": "^2.2.1",
+    "@astrojs/rss": "^2.4.4",
+    "@astrojs/sitemap": "^2.0.1",
     "@astrojs/tailwind": "^4.0.0",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
