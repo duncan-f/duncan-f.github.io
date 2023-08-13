@@ -9,5 +9,4 @@ import partytown from "@astrojs/partytown";
 export default defineConfig({
   site: 'https://duncan-f.github.io',
   integrations: [tailwind(), react(), sitemap(), partytown()],
-  output: 'server'
 });
