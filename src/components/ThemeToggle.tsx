@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IoSunny, IoMoon } from 'react-icons/io5';
+import { BsSunFill, BsMoonFill } from 'react-icons/bs';
 
 export default function ThemeToggle() {
   const [isMounted, setIsMounted] = useState(false)
@@ -43,7 +43,7 @@ export default function ThemeToggle() {
       className="mx-2 inline-flex items-center justify-center"
       onClick={toggleTheme}
     >
-      {theme === "dark" ? <IoSunny size={20} /> : <IoMoon size={20} />}
+      {theme === "dark" ? <BsSunFill size={20} /> : <BsMoonFill size={20} />}
     </button>
   ) : (
     <div />
