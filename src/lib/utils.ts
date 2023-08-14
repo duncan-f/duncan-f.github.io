@@ -9,6 +9,11 @@ export function slugify(str: string) {
     .replace(/-+$/g, '');
 }
 
+export function classify(str: string) {
+  return str.replace(/[a-z][a-z]*-?/g, ([f, ...rest]) =>
+    f.toUpperCase() + rest.join('').replace('-', ' '))
+}
+
 export function dateFormat(date: Date) {
   return new Date(date).toLocaleDateString('en-us', {
     timeZone: "UTC",

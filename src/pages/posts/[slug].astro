@@ -1,13 +1,20 @@
 ---
 import { Icon } from "astro-icon";
 import { slugify, dateFormat } from "@/lib/utils";
-import { getEntryBySlug } from "astro:content";
+import { getCollection } from "astro:content";
 import Article from "@components/Article.astro";
 import Layout from "@layouts/Layout.astro";
 import Link from "@components/Link.astro";
 
-const { slug } = Astro.params;
-const entry = await getEntryBySlug('posts', slug);
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+
+  return posts.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
 const { title, description, date, author, draft, tags } = entry.data;
 const { Content } = await entry.render();
 ---

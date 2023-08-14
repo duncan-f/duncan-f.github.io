@@ -9,43 +9,53 @@ import Heading from "@components/Heading.astro";
 import Link from "@components/Link.astro";
 
 // utils
-import { slugify, formatContent, dateFormat } from "@/lib/utils";
+import { slugify, classify, formatContent, dateFormat } from "@/lib/utils";
 
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const formattedPosts: CollectionEntry<"posts">[] = formatContent(posts);
+
+  const allAuthors: string[] = [];
+
+  formattedPosts.forEach((post) => {
+    allAuthors.push(slugify(post.data.author.name));
+  });
+
+  const newAuthors = [...new Set(allAuthors)];
+
+  return Array.from(new Set(newAuthors)).map((author) => {
+
+    return {
+      params: { author },
+      // only keep the blogposts that contain the tag itself
+      props: {
+        authorPosts: formattedPosts.filter((post) =>
+          slugify(post.data.author.name) === author
+        )
+      },
+    };
+  });
+
+}
 const { author } = Astro.params;
+const { authorPosts } = Astro.props;
 
-const allPosts = await getCollection("posts");
-const formattedPosts: CollectionEntry<"posts">[] = formatContent(allPosts);
-
-const allAuthors = [
-  ...new Set(formattedPosts.map((post) => post.data.author).flat()),
-];
-
-const authorObj = allAuthors.reduce((acc: any, curr: any) => {
-  if (!acc.find((item: any) => item.name === curr.name)) {
-    acc.push(curr);
-  }
-  return acc;
-}, []);
-
-const authorPosts = formattedPosts.filter(
-  (post) => slugify(post.data.author.name) === author
-);
 ---
 
 <Layout
-  title={`Posts by ${authorObj[0].name}`}
-  description={`Posts by ${authorObj[0].name}`}
+  title={`Posts by ${classify(author)}`}
+  description={`Posts by ${classify(author)}`}
 >
   <Main className="pt-10">
     <Heading className={'md:pt-10 pt-20'}>
       Posts by
-      <span class="dark:text-gray-600 text-gray-400">
-        {authorObj[0].name}
+      <span class="dark:text-gray-600 text-gray-400 capitalize">
+        {classify(author)}
       </span>
     </Heading>
     {
       authorPosts.map((post) => (
-      <div class="pt-5">
+      <div class="py-5">
         <h2 class="font-rubik font-bold text-xl">
           {post.data.title}
           {post.data.draft && (<span>+</span>)}
@@ -66,8 +76,8 @@ const authorPosts = formattedPosts.filter(
       </div>
       ))
     }
-
-    <Heading className={'pt-5'}>About the author</Heading>
+<!--
+    <Heading className='pt-1'>About the author</Heading>
     <ul class="mx-auto max-w-2xl my-4">
       {authorObj[0].website &&
         <li class="inline-flex gap-1">
@@ -106,6 +116,7 @@ const authorPosts = formattedPosts.filter(
         </li>
       }
     </ul>
+    -->
   </Main>
 </Layout>
 
