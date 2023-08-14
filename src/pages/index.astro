@@ -1,30 +1,30 @@
 ---
-import { slugify, dateFormat, formatContent } from '@/lib/utils'
+import { dateFormat, formatContent } from '@/lib/utils'
 import { CollectionEntry, getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import Link from '@components/Link.astro';
-import Card from '../components/Card.astro';
+import { siteData } from '@/lib/config';
 
 const posts = await getCollection("posts");
 const formatedPosts: CollectionEntry<"posts">[] = formatContent(posts);
 ---
 
 <Layout title="Home">
-  <div class="text-center mt-20 mb-10 p-5 rounded-lg text-neutral-900 bg-neutral-300 dark:text-neutral-50 dark:bg-neutral-500 drop-shadow-xl">
-    <p>Welcome to my personal blog. Here I share all my knowledge of technology and Cyber Security.</p>
+  <div class="text-justify hyphens-auto md:text-center mt-20 mb-10 p-5 rounded-lg text-neutral-900 bg-neutral-300 dark:text-neutral-50 dark:bg-neutral-500 drop-shadow-xl">
+    <p>Welcome to <strong>{siteData.brand}</strong>. Here I share all my knowledge of technology and Cyber Security.</p>
     <p>I&apos;m an engineer and a self-taught web developer passionate about Cyber Security, Ethical Hacking and CTFs. I like solving challenges on Hack The Box and Try Hack Me.</p>
   </div>
-  { formatedPosts.map((post: any) => (
-    <div class="flex items-center justify-between">
+    { formatedPosts.map((post: any) => (
+    <div class="flex items-center justify-between py-1">
       <Link href={`/posts/${post.slug}`}>
         {post.data.title}
         {post.data.draft && (<span>+</span>)}
       </Link>
-      <div class="hidden md:inline-flex gap-1">
+      <div class="hidden md:inline-flex">
         {dateFormat(post.data.date)}
       </div>
     </div>
-  ))}
+    ))}
     <div class="flex justify-start py-5">
       <Link href="/posts">All posts &raquo;</Link>
     </div>

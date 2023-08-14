@@ -20,7 +20,7 @@ const postsCollection = defineCollection({
       "For best SEO results, please provide no more than 160 characters on this field."
     ),
     category: z.enum(["General", "Writeup", "Tutorial"]),
-    tags: z.array(z.string().optional()),
+    tags: z.array(z.string()).optional(),
     image: z.string().optional(),
     date: z.date().transform((str) => dateFormat(str)),
     draft: z.boolean().default(false).optional()
