@@ -38,7 +38,7 @@ const ThemeToggle: React.FC = () => {
   return isMounted ? (
     <button
       type="button"
-      aria-label="Toggle theme"
+      aria-label={`Toggle ${theme === 'dark' ? 'Light' : 'Dark'}`}
       className='uppercase'
       onClick={toggleTheme}
     >
