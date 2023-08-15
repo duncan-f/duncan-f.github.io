@@ -3,13 +3,13 @@ import Link from "@components/Link.astro";
 import { Icon } from "astro-icon";
 import { siteData } from "@/lib/config";
 ---
-<div class="prose dark:prose-invert mx-auto max-w-sm px-5 md:px-0 md:max-w-2xl mb-5">
+<div class="prose dark:prose-invert mx-auto max-w-sm md:max-w-2xl mb-5">
   <hr />
 
-  <footer class="flex items-center justify-between">
+  <footer class="flex flex-col items-center gap-5 md:flex-row md:justify-between">
     <span>{siteData.author}</span>
 
-    <div class="flex gap-4">
+    <div class="inline-flex gap-4">
       <Link href="https://www.buymeacoffee.com/f0uadfS">
         <Icon name="simple-icons:buymeacoffee" width="20" height="20" title="Buy me a coffee" />
       </Link>
