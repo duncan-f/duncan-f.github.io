@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Icon } from 'astro-icon';
 
 const ThemeToggle: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false)
@@ -40,10 +39,10 @@ const ThemeToggle: React.FC = () => {
     <button
       type="button"
       aria-label="Toggle theme"
-      className="mx-2 inline-flex items-center justify-center"
+      className='uppercase'
       onClick={toggleTheme}
     >
-      {theme === "dark" ? <Icon name="ion:md-sunny" width="20" height="20" /> : <Icon name="ion:moon" width="20" height="20" />}
+      {theme === "dark" ? "Light" : "Dark"}
     </button>
   ) : (
     <div />
