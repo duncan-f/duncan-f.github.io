@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 
     return {
       params: { author },
-      // only keep the blogposts that contain the tag itself
+      // only keep the blogposts that contain the author himself
       props: {
         authorPosts: formattedPosts.filter((post) =>
           slugify(post.data.author.name) === author
@@ -40,6 +40,11 @@ export async function getStaticPaths() {
 const { author } = Astro.params;
 const { authorPosts } = Astro.props;
 
+const arrAuthor: string[] = []
+authorPosts.map((post) => {
+  arrAuthor.push(post.data.author);
+})
+const authorInfo = arrAuthor.reduce(item => item)
 ---
 
 <Layout
@@ -76,47 +81,45 @@ const { authorPosts } = Astro.props;
       </div>
       ))
     }
-<!--
     <Heading className='pt-1'>About the author</Heading>
-    <ul class="mx-auto max-w-2xl my-4">
-      {authorObj[0].website &&
+    <ul class="mx-auto max-w-2xl my-4 flex flex-col gap-2">
+      {authorInfo.website &&
         <li class="inline-flex gap-1">
           <Icon name="tabler:world" width="20" height="20" />
-          <Link href={authorObj[0].website}>{authorObj[0].website}</Link>
+          <Link href={authorInfo.website}>{authorInfo.website}</Link>
         </li>
       }
-      {authorObj[0].email &&
+      {authorInfo.email &&
         <li class="inline-flex gap-1">
           <Icon name="tabler:mail" width="20" height="20" />
-          <Link href={`mailto:${authorObj[0].email}`}>{authorObj[0].email}</Link>
+          <Link href={`mailto:${authorInfo.email}`}>{authorInfo.email}</Link>
         </li>
       }
-      {authorObj[0].btc &&
+      {authorInfo.btc &&
         <li class="inline-flex gap-1">
           <Icon name="btc" width="20" height="20" />
-          <small class="break-all">{authorObj[0].btc}</small>
+          <small class="break-all">{authorInfo.btc}</small>
         </li>
       }
-      {authorObj[0].usdt &&
+      {authorInfo.usdt &&
         <li class="inline-flex gap-1">
           <Icon name="usdt" width="20" height="20" />
-          <small class="break-all">{authorObj[0].usdt}</small>
+          <small class="break-all">{authorInfo.usdt}</small>
         </li>
       }
-      {authorObj[0].eth &&
+      {authorInfo.eth &&
         <li class="inline-flex gap-1">
           <Icon name="eth" width="20" height="20" />
-          <small class="break-all">{authorObj[0].eth}</small>
+          <small class="break-all">{authorInfo.eth}</small>
         </li>
       }
-      {authorObj[0].xmr &&
+      {authorInfo.xmr &&
         <li class="inline-flex gap-1">
           <Icon name="xmr" width="20" height="20" />
-          <small class="max-w-[250px]">{authorObj[0].xmr}</small>
+          <small class="max-w-[250px] break-all">{authorInfo.xmr}</small>
         </li>
       }
     </ul>
-    -->
   </Main>
 </Layout>
 

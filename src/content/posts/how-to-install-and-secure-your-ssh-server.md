@@ -7,7 +7,7 @@ category: Tutorial
 author:
   name: Farouk Mokhtari
   email: fmokhtari@mail.ru
-  website: https://fmokhtari.com
+  website: https://mokhtari.netlify.app
   btc: 1JJmuidSTRCugnBKH8H7bDxEmTtAAg4kyn
   usdt: TWi6yNRhxzkmgZhhoriDzWgvrSsxbdQCb8
   xmr: 87Asjp2TLCkKnw3PYsiKaTDwL8mNhiL7uV67ptCtVxqbSnaZfATQ6t4d1mfWnKu4kB4ieQHMApGhUdUY3h4RKBS2Kuc5RyW

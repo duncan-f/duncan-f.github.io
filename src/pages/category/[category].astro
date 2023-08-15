@@ -17,7 +17,7 @@ export async function getStaticPaths() {
   const allCategories: string[] = [];
 
   formattedPosts.forEach((post) => {
-    allCategories.push(post.data.category.toLowerCase());
+    allCategories.push(slugify(post.data.category));
   });
 
   const newCategories = [...new Set(allCategories)];
@@ -25,7 +25,7 @@ export async function getStaticPaths() {
   return Array.from(new Set(newCategories)).map((cat) => {
     return {
       params: { category: cat },
-      // only keep the blogposts that contain the tag itself
+      // only keep the blogposts that contain the category itself
       props: {
         catPosts: formattedPosts.filter((post) =>
           slugify(post.data.category) === cat
@@ -39,7 +39,10 @@ const { category } = Astro.params;
 const { catPosts } = Astro.props;
 ---
 
-<Layout title={`Posts about ${category}`} description={`Posts about ${category}`}>
+<Layout
+  title={`Posts about ${category}`}
+  description={`Posts about ${category}`}
+>
   <Main className="pt-10">
     <Heading className={'md:pt-10 pt-20'}>
       Posts about
