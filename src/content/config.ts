@@ -1,5 +1,5 @@
-import { z, defineCollection } from 'astro:content';
-import { dateFormat } from '@/lib/utils';
+import { z, defineCollection } from "astro:content";
+import { dateFormat } from "@/lib/utils";
 
 const postsCollection = defineCollection({
   schema: z.object({
@@ -11,23 +11,26 @@ const postsCollection = defineCollection({
       usdt: z.string().optional(),
       xmr: z.string().optional(),
     }),
-    title: z.string().max(
-      160,
-      "For best SEO results, please provide no more than 160 characters on this field."
-    ),
-    description: z.string().max(
-      160,
-      "For best SEO results, please provide no more than 160 characters on this field."
-    ),
+    title: z
+      .string()
+      .max(
+        160,
+        "For best SEO results, please provide no more than 160 characters on this field."
+      ),
+    description: z
+      .string()
+      .max(
+        160,
+        "For best SEO results, please provide no more than 160 characters on this field."
+      ),
     category: z.enum(["General", "Writeup", "Tutorial"]),
     tags: z.array(z.string()).optional(),
     image: z.string().optional(),
     date: z.date().transform((str) => dateFormat(str)),
-    draft: z.boolean().default(false).optional()
+    draft: z.boolean().default(false).optional(),
   }),
 });
 
 export const collections = {
-  'posts': postsCollection,
-}
-
+  posts: postsCollection,
+};

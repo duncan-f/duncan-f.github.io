@@ -7,7 +7,8 @@ slug=$(echo $1 | iconv -t ascii//TRANSLIT | sed -r 's/[^a-zA-Z0-9]+/-/g' | sed -
 [ ! -n "$filepath" ] && mkdir -p "src/content/posts/"
 filepath="src/content/posts/${slug}.md"
 
-content=$(cat <<EOF
+content=$(
+	cat <<EOF
 ---
 title: "${title}"
 description: ""
@@ -18,7 +19,6 @@ draft: true
 EOF
 )
 
-echo "$content" > "$filepath"
+echo "$content" >"$filepath"
 
 echo "File created successfully at $filepath"
-
