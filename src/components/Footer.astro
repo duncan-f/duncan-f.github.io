@@ -1,6 +1,7 @@
 ---
 import Link from "@components/Link.astro";
-import { Icon } from "astro-icon";
+import { SiBuymeacoffee } from "react-icons/si";
+import { FaGithub, FaTwitter, FaRss, FaSitemap } from "react-icons/fa";
 import { siteData } from "@/lib/config";
 ---
 <div class="prose dark:prose-invert mx-auto max-w-sm md:max-w-2xl mb-5">
@@ -11,23 +12,23 @@ import { siteData } from "@/lib/config";
 
     <div class="inline-flex gap-4">
       <Link href="https://www.buymeacoffee.com/f0uadfS">
-        <Icon name="simple-icons:buymeacoffee" width="20" height="20" title="Buy me a coffee" />
+        <SiBuymeacoffee />
       </Link>
 
       <Link href="/rss.xml">
-        <Icon name="mdi:rss" width="20" height="20" title="RSS" />
+        <FaRss />
       </Link>
 
       <Link href="/sitemap-index.xml">
-        <Icon name="mdi:sitemap" width="20" height="20" title="Sitemap" />
+        <FaSitemap />
       </Link>
 
       <Link href="https://github.com/duncan-f">
-        <Icon name="mdi:github" width="20" height="20" title="GitHub" />
+        <FaGithub />
       </Link>
 
       <Link href="https://x.com/duncan12back">
-        <Icon name="mdi:twitter" width="20" height="20" title="Twitter" />
+        <FaTwitter />
       </Link>
     </div>
   </footer>

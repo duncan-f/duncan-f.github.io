@@ -1,6 +1,6 @@
 ---
 // component imports
-import { Icon } from "astro-icon";
+import { FaUser, FaCalendar } from "react-icons/fa";
 import { getCollection, CollectionEntry } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Heading from "@components/Heading.astro";
@@ -58,14 +58,14 @@ const { catPosts } = Astro.props;
           {post.data.draft && (<span>+</span>)}
         </h2>
         <div class="flex items-center pt-2 gap-4">
-        <div class="inline-flex gap-1">
-          <Icon name="tabler:user" width="20" height="20" />
+        <div class="inline-flex items-center gap-1">
+              <FaUser />
           <Link href={`/author/${slugify(post.data.author.name)}`}>
             {post.data.author.name}
           </Link>
         </div>
-        <div class="inline-flex gap-1">
-          <Icon name="tabler:calendar" width="20" height="20" />
+        <div class="inline-flex items-center gap-1">
+              <FaCalendar />
           {dateFormat(post.data.date)}
         </div>
         </div>

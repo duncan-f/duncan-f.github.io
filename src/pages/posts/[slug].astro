@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon";
+import { FaUser, FaCalendar, FaHashtag } from "react-icons/fa";
 import { slugify, dateFormat } from "@/lib/utils";
 import { getCollection } from "astro:content";
 import Article from "@components/Article.astro";
@@ -30,16 +30,16 @@ const { Content } = await entry.render();
     <div
       class="flex flex-col md:flex-row md:items-center md:justify-center mx-10 my-4 gap-2 md:gap-6"
     >
-    <span class="inline-flex gap-1">
-      <Icon name="tabler:user" width="20" height="20" />
+    <span class="inline-flex items-center gap-1">
+    <FaUser />
         <Link href={`/author/${slugify(author.name)}`}>{author.name}</Link>
     </span>
-    <span class="inline-flex gap-1">
-      <Icon name="tabler:calendar" width="20" height="20" />
+    <span class="inline-flex items-center gap-1">
+    <FaCalendar />
       {dateFormat(date)}
     </span>
-    <span class="inline-flex gap-1">
-      <Icon name="tabler:tags" width="20" height="20" />
+    <span class="inline-flex items-center gap-1">
+    <FaHashtag />
       {tags.map((tag: any) =>
         <div class="inline-flex">#{tag}</div>
       )}

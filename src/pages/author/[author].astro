@@ -1,5 +1,7 @@
 ---
-import { Icon } from "astro-icon";
+import { SiTether } from "react-icons/si";
+import { MdMail } from "react-icons/md";
+import { FaUser, FaCalendar, FaLink, FaMonero, FaBtc, FaEthereum } from "react-icons/fa";
 import { getCollection, CollectionEntry } from "astro:content";
 
 // component imports
@@ -66,8 +68,8 @@ const authorInfo = arrAuthor.reduce(item => item)
           {post.data.draft && (<span>+</span>)}
         </h2>
         <div class="flex items-center pt-2 gap-4">
-        <div class="inline-flex gap-1">
-          <Icon name="tabler:calendar" width="20" height="20" />
+        <div class="inline-flex items-center gap-1">
+              <FaCalendar />
           {dateFormat(post.data.date)}
         </div>
         <div class="inline-flex">
@@ -84,38 +86,38 @@ const authorInfo = arrAuthor.reduce(item => item)
     <Heading className='pt-1'>About the author</Heading>
     <ul class="mx-auto max-w-2xl my-4 flex flex-col gap-2">
       {authorInfo.website &&
-        <li class="inline-flex gap-1">
-          <Icon name="tabler:world" width="20" height="20" />
+        <li class="inline-flex items-center gap-1">
+          <FaLink />
           <Link href={authorInfo.website}>{authorInfo.website}</Link>
         </li>
       }
       {authorInfo.email &&
-        <li class="inline-flex gap-1">
-          <Icon name="tabler:mail" width="20" height="20" />
+        <li class="inline-flex items-center gap-1">
+          <MdMail />
           <Link href={`mailto:${authorInfo.email}`}>{authorInfo.email}</Link>
         </li>
       }
       {authorInfo.btc &&
-        <li class="inline-flex gap-1">
-          <Icon name="btc" width="20" height="20" />
+        <li class="inline-flex items-center gap-1">
+          <FaBtc />
           <small class="break-all">{authorInfo.btc}</small>
         </li>
       }
       {authorInfo.usdt &&
-        <li class="inline-flex gap-1">
-          <Icon name="usdt" width="20" height="20" />
+        <li class="inline-flex items-center gap-1">
+          <SiTether />
           <small class="break-all">{authorInfo.usdt}</small>
         </li>
       }
       {authorInfo.eth &&
-        <li class="inline-flex gap-1">
-          <Icon name="eth" width="20" height="20" />
+        <li class="inline-flex items-center gap-1">
+          <FaEthereum />
           <small class="break-all">{authorInfo.eth}</small>
         </li>
       }
       {authorInfo.xmr &&
-        <li class="inline-flex gap-1">
-          <Icon name="xmr" width="20" height="20" />
+        <li class="inline-flex items-center gap-1">
+          <FaMonero />
           <small class="max-w-[250px] break-all">{authorInfo.xmr}</small>
         </li>
       }
