@@ -2,9 +2,9 @@
 
 [ -z "$1" ] && echo "You have to give it a title!" && exit 1
 title=$1
-slug=$(echo $1 | iconv -t ascii//TRANSLIT | sed -r 's/[^a-zA-Z0-9]+/-/g' | sed -r 's/^-+\|-+$//g' | tr A-Z a-z)
+slug=$(echo "$1" | iconv -t ascii//TRANSLIT | sed -r 's/[^a-zA-Z0-9]+/-/g' | sed -r 's/^-+\|-+$//g' | tr "[:upper:]" "[:lower:]")
 
-[ ! -n "$filepath" ] && mkdir -p "src/content/posts/"
+[ -z "$filepath" ] && mkdir -p "src/content/posts/"
 filepath="src/content/posts/${slug}.md"
 
 content=$(
